@@ -2,13 +2,15 @@ const photos = ["photo-1.jpg", "photo-2.jpg", "photo-3.jpg", "photo-4.jpg", "pho
 const photoLayer = document.querySelector("#photos");
 const confettiLayer = document.querySelector("#confetti");
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+let readyPhotos = [];
 
 function randomBetween(min, max) { return Math.random() * (max - min) + min; }
 
 function addPhoto() {
   const photo = document.createElement("img");
   photo.className = "photo";
-  photo.src = `assets/${photos[Math.floor(Math.random() * photos.length)]}`;
+  if (!readyPhotos.length) return;
+  photo.src = readyPhotos[Math.floor(Math.random() * readyPhotos.length)];
   photo.alt = "";
   // Keep the centre clear so the birthday note is always readable.
   let left = randomBetween(1, 83);
@@ -18,6 +20,8 @@ function addPhoto() {
   photo.style.top = `${top}%`;
   photo.style.setProperty("--tilt", `${randomBetween(-12, 12)}deg`);
   photo.style.setProperty("--life", `${randomBetween(4.8, 7.2)}s`);
+  // A missing or slow image should never leave an empty photo frame onscreen.
+  photo.addEventListener("error", () => photo.remove(), { once: true });
   photoLayer.append(photo);
   window.setTimeout(() => photo.remove(), 7400);
 }
@@ -37,12 +41,23 @@ function addConfetti(count = 55) {
   }
 }
 
+function preloadPhotos() {
+  return Promise.all(photos.map((name) => new Promise((resolve) => {
+    const image = new Image();
+    const source = `assets/${name}?v=2`;
+    image.onload = () => { readyPhotos.push(source); resolve(); };
+    image.onerror = resolve;
+    image.src = source;
+  })));
+}
+
 addConfetti();
-if (!reduceMotion) {
+preloadPhotos().then(() => {
+  if (reduceMotion) return;
   addPhoto();
   window.setTimeout(addPhoto, 900);
   window.setInterval(addPhoto, 1450);
-}
+});
 
 document.querySelector("#surprise").addEventListener("click", () => {
   addConfetti(28);
