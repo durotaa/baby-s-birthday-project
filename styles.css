@@ -8,7 +8,7 @@ body {
 .glow-one { background: #b31372; top: -34vmax; right: -18vmax; }
 .glow-two { background: #6026b5; bottom: -35vmax; left: -21vmax; }
 main { min-height: 100svh; position: relative; display: grid; place-items: center; padding: 28px 20px; text-align: center; z-index: 2; }
-.message { width: min(650px, 100%); padding: 30px 20px; border-radius: 30px; background: linear-gradient(140deg, rgba(50,15,48,.76), rgba(26,7,31,.48)); backdrop-filter: blur(6px); box-shadow: 0 12px 70px rgba(0,0,0,.18); }
+.message { width: min(650px, 100%); padding: 30px 20px; border-radius: 30px; background: linear-gradient(140deg, rgba(50,15,48,.86), rgba(26,7,31,.69)); box-shadow: 0 12px 70px rgba(0,0,0,.18); }
 .date { display: inline-flex; gap: 8px; align-items: center; margin: 0 0 20px; padding: 8px 18px; border-radius: 99px; color: #37121c; background: #ffd456; font-weight: 700; }
 .date span { color: #d5267a; }
 h1 { margin: 0; color: #ffaad6; font: 800 clamp(2.3rem, 6vw, 4.8rem)/.98 "Playfair Display", serif; letter-spacing: -.04em; text-wrap: balance; text-shadow: 0 3px 18px rgba(34,0,25,.35); }
