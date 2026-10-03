@@ -1,4 +1,4 @@
-const photos = Array.from({ length: 29 }, (_, index) => `photo-${index + 1}.jpg`);
+const photos = Array.from({ length: 40 }, (_, index) => `photo-${index + 1}.jpg`);
 const photoLayer = document.querySelector("#photos");
 const confettiLayer = document.querySelector("#confetti");
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
