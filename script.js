@@ -16,7 +16,7 @@ function addPhoto() {
   photo.src = photoQueue.pop();
   photo.alt = "";
   let left = randomBetween(1, 83);
-  let top = randomBetween(55, 76);
+  let top = randomBetween(38, 76);
   photo.style.left = `${left}%`;
   photo.style.top = `${top}%`;
   photo.style.setProperty("--tilt", `${randomBetween(-12, 12)}deg`);

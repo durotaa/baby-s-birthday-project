@@ -22,8 +22,7 @@ button:hover, button:focus-visible { transform: translateY(-2px) scale(1.03); ba
 #photos, #confetti { position: fixed; inset: 0; pointer-events: none; overflow: hidden; }
 .photo { position: absolute; width: clamp(105px, 16vw, 205px); height: clamp(138px, 21vw, 265px); object-fit: cover; border: 5px solid #fff8fc; border-radius: 13px; box-shadow: 0 16px 36px #0701078a; animation: photo-pop var(--life) ease-in-out forwards; }
 .confetti { position: absolute; width: 9px; height: 14px; border-radius: 2px; animation: drift var(--duration) linear infinite; opacity: .9; }
-.hint { position: fixed; bottom: 17px; width: 100%; z-index: 2; margin: 0; text-align: center; color: #eeb1d5b0; font-size: .78rem; letter-spacing: .03em; }
 @keyframes photo-pop { 0% { opacity: 0; transform: translateY(18px) scale(.7) rotate(var(--tilt)); } 14%, 80% { opacity: 1; transform: translateY(0) scale(1) rotate(var(--tilt)); } 100% { opacity: 0; transform: translateY(-18px) scale(.92) rotate(var(--tilt)); } }
 @keyframes drift { from { transform: translateY(-8vh) rotate(0deg); } to { transform: translateY(112vh) rotate(660deg); } }
-@media (max-width: 540px) { main { padding-top: 22px; } .message { width: min(100% - 24px, 470px); padding: 21px 14px; border-radius: 19px; } .photo { width: 90px; height: 120px; border-width: 4px; } .hint { font-size: .68rem; } #surprise { bottom: 46px; } }
+@media (max-width: 540px) { main { padding-top: 22px; } .message { width: min(100% - 24px, 470px); padding: 21px 14px; border-radius: 19px; } .photo { width: 90px; height: 120px; border-width: 4px; } #surprise { bottom: 46px; } }
 @media (prefers-reduced-motion: reduce) { .photo, .confetti { animation: none; } }
