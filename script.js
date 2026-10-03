@@ -1,8 +1,10 @@
-const photos = ["photo-1.jpg", "photo-2.jpg", "photo-3.jpg", "photo-4.jpg", "photo-5.jpg"];
+const photos = Array.from({ length: 29 }, (_, index) => `photo-${index + 1}.jpg`);
 const photoLayer = document.querySelector("#photos");
 const confettiLayer = document.querySelector("#confetti");
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 let readyPhotos = [];
+let photoQueue = [];
+let photosStarted = false;
 
 function randomBetween(min, max) { return Math.random() * (max - min) + min; }
 
@@ -10,7 +12,8 @@ function addPhoto() {
   const photo = document.createElement("img");
   photo.className = "photo";
   if (!readyPhotos.length) return;
-  photo.src = readyPhotos[Math.floor(Math.random() * readyPhotos.length)];
+  if (!photoQueue.length) photoQueue = [...readyPhotos].sort(() => Math.random() - .5);
+  photo.src = photoQueue.pop();
   photo.alt = "";
   // Keep the centre clear so the birthday note is always readable.
   let left = randomBetween(1, 83);
@@ -41,23 +44,29 @@ function addConfetti(count = 55) {
   }
 }
 
-function preloadPhotos() {
-  return Promise.all(photos.map((name) => new Promise((resolve) => {
-    const image = new Image();
-    const source = `assets/${name}?v=2`;
-    image.onload = () => { readyPhotos.push(source); resolve(); };
-    image.onerror = resolve;
-    image.src = source;
-  })));
-}
-
-addConfetti();
-preloadPhotos().then(() => {
-  if (reduceMotion) return;
+function startPhotos() {
+  if (photosStarted || reduceMotion) return;
+  photosStarted = true;
   addPhoto();
   window.setTimeout(addPhoto, 900);
   window.setInterval(addPhoto, 1450);
-});
+}
+
+function preloadPhotos() {
+  photos.forEach((name) => {
+    const image = new Image();
+    const source = `assets/${name}?v=3`;
+    image.onload = () => {
+      readyPhotos.push(source);
+      // Begin the celebration quickly, then expand the rotation as images load.
+      if (readyPhotos.length >= 4) startPhotos();
+    };
+    image.src = source;
+  });
+}
+
+addConfetti();
+preloadPhotos();
 
 document.querySelector("#surprise").addEventListener("click", () => {
   addConfetti(28);
