@@ -7,7 +7,7 @@ body {
 .glow { position: fixed; width: 55vmax; height: 55vmax; border-radius: 50%; filter: blur(55px); opacity: .19; pointer-events: none; }
 .glow-one { background: #b31372; top: -34vmax; right: -18vmax; }
 .glow-two { background: #6026b5; bottom: -35vmax; left: -21vmax; }
-main { min-height: 100svh; position: relative; display: grid; place-items: center; padding: 28px 20px; text-align: center; z-index: 2; }
+main { min-height: 100svh; position: relative; display: grid; place-items: start center; padding: clamp(25px, 5vh, 64px) 20px; text-align: center; z-index: 2; }
 .message { width: min(570px, calc(100% - 32px)); padding: 23px 16px; border-radius: 22px; background: linear-gradient(140deg, rgba(50,15,48,.48), rgba(26,7,31,.27)); box-shadow: 0 12px 55px rgba(0,0,0,.12); }
 .date { display: inline-flex; gap: 8px; align-items: center; margin: 0 0 20px; padding: 8px 18px; border-radius: 99px; color: #37121c; background: #ffd456; font-weight: 700; }
 .date span { color: #d5267a; }
@@ -17,11 +17,13 @@ h1 { margin: 0; color: #ffaad6; font: 800 clamp(2.3rem, 6vw, 4.8rem)/.98 "Playfa
 .love span { margin-left: 4px; font-size: 1.5rem; vertical-align: -2px; }
 button { border: 1px solid rgba(255,255,255,.28); border-radius: 99px; padding: 12px 18px; cursor: pointer; background: #e83e91; color: white; font: 700 .95rem "DM Sans", sans-serif; box-shadow: 0 8px 24px #870b4a70; transition: transform .2s, background .2s; }
 button:hover, button:focus-visible { transform: translateY(-2px) scale(1.03); background: #f553a4; }
+#surprise { position: fixed; left: 50%; bottom: clamp(50px, 12svh, 112px); z-index: 3; transform: translateX(-50%); white-space: nowrap; }
+#surprise:hover, #surprise:focus-visible { transform: translateX(-50%) translateY(-2px) scale(1.03); }
 #photos, #confetti { position: fixed; inset: 0; pointer-events: none; overflow: hidden; }
 .photo { position: absolute; width: clamp(105px, 16vw, 205px); height: clamp(138px, 21vw, 265px); object-fit: cover; border: 5px solid #fff8fc; border-radius: 13px; box-shadow: 0 16px 36px #0701078a; animation: photo-pop var(--life) ease-in-out forwards; }
 .confetti { position: absolute; width: 9px; height: 14px; border-radius: 2px; animation: drift var(--duration) linear infinite; opacity: .9; }
 .hint { position: fixed; bottom: 17px; width: 100%; z-index: 2; margin: 0; text-align: center; color: #eeb1d5b0; font-size: .78rem; letter-spacing: .03em; }
 @keyframes photo-pop { 0% { opacity: 0; transform: translateY(18px) scale(.7) rotate(var(--tilt)); } 14%, 80% { opacity: 1; transform: translateY(0) scale(1) rotate(var(--tilt)); } 100% { opacity: 0; transform: translateY(-18px) scale(.92) rotate(var(--tilt)); } }
 @keyframes drift { from { transform: translateY(-8vh) rotate(0deg); } to { transform: translateY(112vh) rotate(660deg); } }
-@media (max-width: 540px) { .message { width: min(100% - 24px, 470px); padding: 21px 14px; border-radius: 19px; } .photo { width: 90px; height: 120px; border-width: 4px; } .hint { font-size: .68rem; } }
+@media (max-width: 540px) { main { padding-top: 22px; } .message { width: min(100% - 24px, 470px); padding: 21px 14px; border-radius: 19px; } .photo { width: 90px; height: 120px; border-width: 4px; } .hint { font-size: .68rem; } #surprise { bottom: 46px; } }
 @media (prefers-reduced-motion: reduce) { .photo, .confetti { animation: none; } }

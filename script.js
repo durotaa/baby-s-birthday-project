@@ -15,10 +15,8 @@ function addPhoto() {
   if (!photoQueue.length) photoQueue = [...readyPhotos].sort(() => Math.random() - .5);
   photo.src = photoQueue.pop();
   photo.alt = "";
-  // Keep the centre clear so the birthday note is always readable.
   let left = randomBetween(1, 83);
-  let top = randomBetween(4, 76);
-  if (left > 22 && left < 65 && top > 22 && top < 63) left = Math.random() > .5 ? randomBetween(68, 84) : randomBetween(1, 17);
+  let top = randomBetween(55, 76);
   photo.style.left = `${left}%`;
   photo.style.top = `${top}%`;
   photo.style.setProperty("--tilt", `${randomBetween(-12, 12)}deg`);
